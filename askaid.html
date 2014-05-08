@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+var geocoder;
+var x=document.getElementById("demo");
+	function getLocation(){
+		geocoder = new google.maps.Geocoder();
+		
+		window.localStorage.setItem("iligtasUsername", "Juan Dela Cruz");
+		document.getElementById("txtUsername").value = window.localStorage.getItem("iligtasUsername");
+		
+		//code for date and time
+		var now     = new Date(); 
+		var year    = now.getFullYear();
+		var month   = now.getMonth()+1; 
+		var day     = now.getDate();
+		var hour    = now.getHours();
+		var minute  = now.getMinutes();
+		var second  = now.getSeconds(); 
+		if(month.toString().length == 1) {
+			var month = '0'+month;
+		}
+		if(day.toString().length == 1) {
+        var day = '0'+day;
+		}   
+		if(hour.toString().length == 1) {
+			var hour = '0'+hour;
+		}
+		if(minute.toString().length == 1) {
+			var minute = '0'+minute;
+		}
+		if(second.toString().length == 1) {
+			var second = '0'+second;
+		}   
+		var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;
+		document.getElementById('txtDateTime').value = dateTime;
+	
+	//end code date and time
+	if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
+	
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+
+function showPosition(position)
+  {
+  lat=position.coords.latitude;
+  lon=position.coords.longitude;
+  latlon=new google.maps.LatLng(lat, lon)
+  mapholder=document.getElementById('mapholder')
+  //mapholder.style.height='250px';
+  //mapholder.style.width='400pxpx';
+  
+  
+  document.getElementById("txtLatitude").value = position.coords.latitude;
+  document.getElementById("txtLongtitude").value = position.coords.longitude;
+  
+  document.getElementById('txtLatLng').value = position.coords.latitude+","+position.coords.longitude;
+
+  var myOptions={
+  center:latlon,zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP,
+  mapTypeControl:false,
+  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+  };
+  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+  var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+  
+  //start codelatlang
+  var input = document.getElementById('txtLatLng').value;
+  var latlngStr = input.split(',', 2);
+  var lat = parseFloat(latlngStr[0]);
+  var lng = parseFloat(latlngStr[1]);
+  var latlng = new google.maps.LatLng(lat, lng);
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        
+        document.getElementById('txtCurrentAddress').value = results[1].formatted_address;
+		document.getElementById('txtCurrentAddressHeader').innerHTML = results[1].formatted_address;
+        //infowindow.open(map, marker);
+      } else {
+        alert('No results found');
+      }
+    } else {
+      alert('Geocoder failed due to: ' + status);
+    }
+  });
+  
+  //end code latlang
+  }
+
+function showError(error)
+  {
+  switch(error.code) 
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML="User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML="Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML="The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML="An unknown error occurred."
+      break;
+    }
+  }
+</script>
+<script>
+
+function addAid(){
+	$.getJSON("addaid.php?callback=?", $("#frmAddAid").serialize(),function(data)
+					{
+						alert("Congratulations. Registration Complete! Welcome to i@ATA");
+						
+					}).fail(function(data){
+						alert("Registration Failed!");
+						
+						
+					});
+
+
+}
+</script>
+<style type="text/css">
+	html, body, #mapholder {
+    width: 100%;
+    height: 70%%;
+    margin: 0;
+    padding: 0;
+}
+#mapholder {
+    position: relative;
+}
+</style>
+</head>
+<body onLoad="getLocation()" >
+
+<h1>Your Current Position</h1>
+<h2 id="txtCurrentAddressHeader"></h2>
+<div id="mapholder"></div>
+
+<p>These form will be hidden except on choosing the Aid</p>
+<form id="frmAddAid" action="javascript:addAid();">
+	<label>Name:</label><input type="text" id="txtUsername" name="txtUsername" /><br/>
+	<label>Latitude:</label><input type="text" id="txtLatitude" name="txtLatitude" /><br/>
+	<label>Longtitude:</label><input type="text" id="txtLongtitude" name="txtLongtitude" /><br/>
+	<label>Lat+Lng:</label><input type="text" id="txtLatLng" name="txtLatLng" ><br/>
+	<label>Current Address:</label><input type="text" id="txtCurrentAddress" /><br/>
+	<label>DateTime:</label><input type="text" id="txtDateTime" /><br/>
+	<label>Aid:</label><select name="txtAid" >
+		<option value="">Choose Aid</option>
+		<option value="emergency">Emergency Support(manpower)</option>
+		<option value="medical">Medical Assistance</option>
+		<option value="food">Food and Water</option>
+		<option value="shelter">Shelter</option>
+		<option value="construction">Construction</option>
+	</select>
+	<br/>
+	<label>Notes:</label><textarea></textarea>
+	<input type="submit" value="Ask Aid" />
+</form>
+</body>
+</html>
