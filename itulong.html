@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Readysaster App</title>
+      <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" >
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+      <style>
+         body {
+         background:#ddd;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="navbar navbar-default">
+         <br>
+         <div class="center-block">
+            <div class="text-center">
+               <img src="images/banner-with-text.png" style="max-width:60%;margin-bottom:10px;">
+               <div class="list-group" style="padding:0;margin-bottom:0;">
+                  <a href="javascript:ocmopts()" class="list-group-item active" style="background:#222;padding-top:2px;padding-bottom:2px"><img src="images/elipsis.png" style="width:32px"></a>
+               </div>
+            </div>
+            <!-- More Options Here -->
+            <div id="moremenu" style="display:none">
+               <div class="list-group" style="padding:0;margin-bottom:0;">
+                  <a href="javascript:logoutaccount()" class="list-group-item active lc-item" style="background: #444">
+                     <div class="center-block" style="max-width:120px"><span class="glyphicon glyphicon-lock" style="font-size:36px;vertical-align:middle"></span>&nbsp;&nbsp;&nbsp;Logout</div>
+                  </a>
+               </div>
+            </div>
+            <!-- end more options-->
+         </div>
+      </div>
+      <div id="bottommenu" class="navbar navbar-default navbar-fixed-bottom" style="display:none;min-height:0;">
+         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
+            <div class="btn-group btn-group-justified" >
+               <a href="home.html" class="btn btn-warning" style="margin-bottom:0;"><img src="images/ihanda.png" class="lc-icn"><br><small>iHanda</small></a>
+               <a href="itulong.html" class="btn btn-danger"style="margin-bottom:0;"><img src="images/itulong.png" class="lc-icn"><br><small>iTulong</small></a>
+               <a href="ibangon.html" class="btn btn-success"style="margin-bottom:0;"><img src="images/ibangon.png" class="lc-icn"><br><small>iBangon</small></a>
+            </div>
+         </div>
+      </div>
+      <div id="loadingtext" class="text-center center-block" style="max-width:640px;">
+         <h3><img id="imgloader" src="images/ajax-loader.gif" style="width:32px;opacity:0.5;vertical-align:middle;-webkit-border-radius:40px;border-radius: 40px;">&nbsp;<b>Loading...</b></h3>
+         <br>
+      </div>
+      <div class="container">
+         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
+            <!-- Offline Mode Alert - START -->
+            <div class="alert alert-info offlinemodeind" style="display:none">
+               <b>Offline Mode Activated</b><br>
+               <span class="pull-right" style="margin-left:10px;font-size:3em"><span class="glyphicon glyphicon-info-sign"></span></span>
+               <small>We saw that you are disconnected to the internet, so we made iLigtas App suitable for those who are offline</small>
+               <span class="clearfix"></span>
+            </div>
+            <!-- Offline Mode Alert - END -->
+            <!-- Insert Content Here - START -->
+            <!-- START Content Container -->
+            <div id="contentcontainer" style="display:none">
+               <div class="alert alert-danger">
+                  <span class="pull-right" style="margin-left:10px;"><img src="images/itulong.png" style="width:54px;vertical-align:middle"></span></span>
+                  <h2>iTulong</h2>
+                  <small>I Share, I Help. Foster community preparedness and engagement to help and rescue during disasters.</small>
+                  <span class="clearfix"></span>
+               </div>
+               <!-- Google Maps and Current Location -->
+               <div class="panel panel-default onlyonline">
+                  <div class="panel-heading"><b>Your Current Position:</b><br><span id="currentaddressheader"></span></div>
+                  <div class="panel-body">
+                     <div id="mapholder" class="center-block" style="width:90%; height:400px;border: 2px solid #ccc"></div>
+                  </div>
+               </div>
+               <div class="panel panel-primary onlyonline">
+                  <div class="panel-heading"><b>Ask Aid</b></div>
+                  <div class="panel-body">
+                     <div class="alert alert-danger">
+                        <b>Warning</b><br>
+                        <span class="pull-right" style="margin-left:10px;font-size:3em"><span class="glyphicon glyphicon-warning-sign"></span></span>
+                        <small>Adding an SOS means you agree to the </small><a href="javascript:openterms();" class="btn btn-primary btn-xs" style="text-decoration:none">Terms and Conditions</a><small> of iLigtas.</small>
+                        <span class="clearfix"></span>
+                     </div>
+                     <form id="addaidform" action="javascript:addAid();">
+                        <input type="hidden" id="username" name="username" />
+                        <input type="hidden" id="latitude" name="latitude" />
+                        <input type="hidden" id="longitude" name="longitude" />
+                        <input type="hidden" id="latlong" name="latlong" >
+                        <input type="hidden" id="currentaddress" name="currentaddress" />
+                        <input type="hidden" id="datetime" name="datetime" />
+                        <b>Aid:</b><br>
+                        <select name="aidtype"  style="height:40px;width:100%">
+                           <option value="medical">Medical Assistance</option>
+                           <option value="food">Food and Water</option>
+                           <option value="shelter">Shelter</option>
+                           <option value="construction">Construction</option>
+                           <option value="rescue">Rescue</option>
+                        </select>
+                        <br>
+                        <b>Add Notes:</b>
+                        <textarea class="form-control" id="aidnote" name="aidnote" ></textarea>
+                        <br>
+                        <input class="btn btn-success btn-block" type="submit" value="Ask Aid">
+                     </form>
+                  </div>
+               </div>
+               <div class="panel panel-primary">
+                  <div class="panel-heading"><b>Ask Aid via SMS</b></div>
+                  <div class="panel-body">
+				  Ask for help even OFFLINE, simply by texting "<b>NOW ILIGTAS &lt;keyword&gt;</b>" and send to <b>6800</b> <br> keywords: <a class="btn btn-primary btn-sm">FOOD</a>  <a class="btn btn-primary btn-sm">MED</a>  <a class="btn btn-primary btn-sm">RESC</a>  <a class="btn btn-primary btn-sm">EVAC</a>  <a class="btn btn-primary btn-sm">CONS</a>
+                  </div>
+               </div>
+            </div>
+            <!-- END Content Container -->
+            <!-- END Content Here -->
+            <div class="text-center"><br>iLigtas | READYSASTER 2014<br></div>
+            <!-- DO NOT REMOVE THIS - Used to Determine Online from Offline Mode-->
+            <div class="offlinemodeind text-center" style="display:none"><span class="label label-info">OFFLINE MODE ACTIVATED</span></div>
+         </div>
+         <div style="height:100px;"></div>
+      </div>
+      <!--- Error Modal Start -->
+      <div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-vertical-centered">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 id="popuptitle" class="modal-title"></h4>
+               </div>
+               <div class="modal-body">
+                  <p id="popuptext"></p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--- Error Modal End -->
+	  <!--- Terms and Conditions Modal Start -->
+      <div class="modal fade" id="termsmodal" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Terms and Conditions</h4>
+               </div>
+               <div class="modal-body">
+                  <h2 class="text-center">Terms and Conditions</h2>
+					<p align="justify">
+						<b>In using this application you are deemed to have read and agreed to the following terms and conditions:</b>
+						<br>
+						This application <b>MUST</b> be used <b>ONLY</b> for the <b>PURPOSE</b> of <b>Disaster Risk Reduction, Response and Management</b>. We constantly review our systems and data to ensure the best possible service to you. The Government has created specific offences for unauthorized actions against computer systems and data. We will investigate any such actions with a view to prosecuting and/or taking civil proceedings to recover damages against those responsible.
+						<br>
+						<h4>Acceptable Use</h4>
+						You shall not do any of the following or permit any other third parties to do any of the following:
+						<ol type="a">
+							<li>Post or transmit any unlawful, deceiving, threatening, abusive, profane information of any kind, including, without limitation, any transmission constituting or encouraging conduct that would constitute a criminal offense, give rise to civil liability, or otherwise violate any local, provincial, state, national or international law and regulations.</li>
+							<li>Post or transmit any information or software that the sender is aware contains a virus, worm, or other harmful component.</li>
+						</ol>
+						You have an <b>AFFIRMATIVE OBLIGATION</b> to provide the application with correct information. You agree to provide true, accurate, current and complete information and to maintain and promptly update your information as necessary. You agree not to impersonate any other person you are not authorized to use.
+						<br><br>
+						<p class="text-center">&copy; iLigtas May 2014. All Rights Reserved</p>
+					</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--- Terms Modal End -->
+      <script src="js/jquery-1.10.2.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+      <script>
+         var geocoder;
+         var x=document.getElementById("demo");
+         function getLocation(){
+         	geocoder = new google.maps.Geocoder();
+         	
+         	$("#username").val(globalusername);
+         	
+         	//code for date and time
+         	var now     = new Date(); 
+         	var year    = now.getFullYear();
+         	var month   = now.getMonth()+1; 
+         	var day     = now.getDate();
+         	var hour    = now.getHours();
+         	var minute  = now.getMinutes();
+         	var second  = now.getSeconds(); 
+         	if(month.toString().length == 1) {
+         		var month = '0'+month;
+         	}
+         	if(day.toString().length == 1) {
+                var day = '0'+day;
+         	}   
+         	if(hour.toString().length == 1) {
+         		var hour = '0'+hour;
+         	}
+         	if(minute.toString().length == 1) {
+         		var minute = '0'+minute;
+         	}
+         	if(second.toString().length == 1) {
+         		var second = '0'+second;
+         	}   
+         	var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;
+         	document.getElementById('datetime').value = dateTime;
+         
+         //end code date and time
+         if (navigator.geolocation)
+            {
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+         
+            }
+          else{x.innerHTML="Geolocation is not supported by this browser.";}
+          }
+         
+         function showPosition(position)
+          {
+          lat=position.coords.latitude;
+          lon=position.coords.longitude;
+          latlon=new google.maps.LatLng(lat, lon);
+          mapholder=document.getElementById('mapholder');
+          
+          
+          document.getElementById("latitude").value = position.coords.latitude;
+          document.getElementById("longitude").value = position.coords.longitude;
+          
+          document.getElementById('latlong').value = position.coords.latitude+","+position.coords.longitude;
+         
+          var myOptions={
+          center:latlon,zoom:15,
+          mapTypeId:google.maps.MapTypeId.ROADMAP,
+          mapTypeControl:false,
+          navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+          };
+          var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+          var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+          
+          //start codelatlang
+          var input = document.getElementById('latlong').value;
+          var latlngStr = input.split(',', 2);
+          var lat = parseFloat(latlngStr[0]);
+          var lng = parseFloat(latlngStr[1]);
+          var latlng = new google.maps.LatLng(lat, lng);
+          geocoder.geocode({'latLng': latlng}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                
+                document.getElementById('currentaddress').value = results[1].formatted_address;
+         	document.getElementById('currentaddressheader').innerHTML = results[1].formatted_address;
+                //infowindow.open(map, marker);
+              } else {
+                alert('No results found');
+              }
+            } else {
+              alert('Geocoder failed due to: ' + status);
+            }
+          });
+          
+          //end code latlang
+          }
+         
+         function showError(error)
+          {
+          switch(error.code) 
+            {
+            case error.PERMISSION_DENIED:
+              x.innerHTML="User denied the request for Geolocation."
+              break;
+            case error.POSITION_UNAVAILABLE:
+              x.innerHTML="Location information is unavailable."
+              break;
+            case error.TIMEOUT:
+              x.innerHTML="The request to get user location timed out."
+              break;
+            case error.UNKNOWN_ERROR:
+              x.innerHTML="An unknown error occurred."
+              break;
+            }
+          }
+		  
+		  function openterms()
+		  {
+		  //Opens the Terms Modal
+		   $('#termsmodal').modal('show');
+		  }
+          function addAid()
+          {
+          //function for Asking Aid
+          var form = $("#addaidform");
+          $('#loadingmodal').modal({backdrop: "static",keyboard: false},'show');
+          $.getJSON("http://gcccs.org/iligtas/requestaid.php?callback=?", form.serialize(),function(data)
+         		{
+         		alert("Your SOS is successfully saved and marked.");
+         		$('#loadingmodal').modal("hide");
+         		}).fail(function(data){
+         		alert("Failed to ask Aid.");
+         		location.reload();
+         		$('#loadingmodal').modal("hide");
+         		});
+          }
+          
+         function ocmopts()
+         {
+         //opens and closes the more options menu
+         $( "#moremenu" ).slideToggle("fast");
+         }
+         $(function(){getLocation();
+         $( "#loadingtext" ).delay(500).slideUp("fast"); //hides Loading Text below Header
+         $( "#bottommenu" ).slideDown("slow"); // Bottom Navbar Animation
+         $( "#contentcontainer" ).slideDown("fast"); // Content Animation
+         })
+      </script>
+   </body>
+</html>

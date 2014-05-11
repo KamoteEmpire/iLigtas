@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.gcccs.org.iligtas" version="1.0">
+
+	<name>iLigtas</name>
+	<description>iLigtas. Prepare, Share, Care</description>
+	<author>Team Kamote</author>
+	<gap:platforms>
+		<gap:platform name="android" />
+	</gap:platforms>
+	
+	<icon src="images/icon_36.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="images/icon_48.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="images/icon_72.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="images/icon_96.png" gap:platform="android" gap:density="xhdpi" />
+	<icon src="images/icon_86.png" width="86" height="86" gap:role="default" />
+	<preference name="phonegap-version" value="3.3.0" />
+	
+	<access origin="*" subdomains="true" />
+	<access uri="*" subdomains="true" />
+	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/camera"/>
+	<feature name="http://api.phonegap.com/1.0/file"/>
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	
+	<gap:plugin name="org.apache.cordova.inappbrowser" />
+	<gap:plugin name="org.apache.cordova.camera" />
+	<gap:plugin name="org.apache.cordova.media" />
+	<gap:plugin name="org.apache.cordova.media-capture" />
+	
+	<preference name="orientation" value="portrait" />
+	<preference name="fullscreen" value="true" />
+	<preference name="target-device" value="universal" />
+</widget>
