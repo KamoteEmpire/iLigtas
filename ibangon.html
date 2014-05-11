@@ -79,7 +79,7 @@
                   <div id="canvascont" class="panel panel-primary" style="display:none;">
                      <div class="panel-heading"><b>Aid Assistance Distribution<span id="forloc"></span></b></div>
                      <div class="panel-body">
-                        <canvas class="center-block" id="canvas"></canvas>
+                        <canvas class="center-block" id="canvas" width="180" height="180"></canvas>
                      </div>
                      <div class="panel-footer">
                         <div id="chartlegendcont">
@@ -204,8 +204,6 @@
          		$("#locchooser").append('<option value="'+value['location']+'">'+value['location']+'</option>');
          		});
          		});
-         $("#canvas").prop({ width: $("#canvascont").width()-30, height: $("#canvascont").width()-30 });
-         });
       </script>
    </body>
 </html>
