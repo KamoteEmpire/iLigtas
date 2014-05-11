@@ -13,8 +13,8 @@ iLigtas is a flexible lowtech and hitech, easy to use, cross-platform mobile app
   
   * iTulong - lets registered users of the application geotag their current location and send "SOS" to the iLigtas database
             
-  * - has an OFFLINE mode where users can send sms for geotagging in case of the inavailability of Network Data Services
-  * - SMS can easily be sent by texting "NOW iligtas <keyword>" and send to 6800
+    * - has an OFFLINE mode where users can send sms for geotagging in case of the inavailability of Network Data Services
+    * - SMS can easily be sent by texting "NOW iligtas <keyword>" and send to 6800
                 > keywords
                     * MED  for medical
                     * RESC for rescue 
