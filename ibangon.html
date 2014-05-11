@@ -75,7 +75,7 @@
                   <select id="locchooser" onchange="loaddatatograph(this.value)" style="height:40px;width:100%">
                      <option value="cancel">Select a Location</option>
                   </select>
-                  <br><br>
+				  <br><br>
                   <div id="canvascont" class="panel panel-primary" style="display:none;">
                      <div class="panel-heading"><b>Aid Assistance Distribution<span id="forloc"></span></b></div>
                      <div class="panel-body">
@@ -84,6 +84,8 @@
                      <div class="panel-footer">
                         <div id="chartlegendcont">
                         </div>
+						<div id="tweetsharecont" style="display:none"></div>
+						<a href="javascript:tweetchartdata();" class="btn btn-info btn-block" style="text-decoration:none;margin-top:10px;">Tweet Chart Data</a>
                      </div>
                   </div>
                </div>
@@ -175,6 +177,7 @@
          				color : "#4D5360"
          			}
          		];
+				$("#tweetsharecont").text('Aid Needed in: '+locationstring+' - MED: ' + data.medicalcount+ ' FOOD: ' + data.foodcount +  ' EVAC: ' + data.sheltercount + ' CONS: ' + data.constructioncount+ ' RESC: ' + data.rescuecount + ' #RescuePH #iLigtas #Readysaster');
          		var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);
          		$("#chartlegendcont").html('<img src="images/colormedical.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Medical: </b>'+data.medicalcount+
          												'&nbsp;&nbsp;<img src="images/colorfood.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Food: </b>'+data.foodcount+
@@ -185,7 +188,10 @@
          		});
          		
             }
-         
+         function tweetchartdata()
+		 {
+		 window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent($("#tweetsharecont").text()),"_blank")
+		 }
          $(function()
          {
          initialize();
