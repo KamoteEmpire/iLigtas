@@ -1,209 +1,210 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Readysaster App</title>
-      <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" >
-      <meta charset="utf-8">
-      <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
-      <style>
-         body {
-         background:#ddd;
-         }
-      </style>
-   </head>
-   <body>
-      <div class="navbar navbar-default">
-         <br>
-         <div class="center-block">
-            <div class="text-center">
-               <img src="images/banner-with-text.png" style="max-width:60%;margin-bottom:10px;">
-               <div class="list-group" style="padding:0;margin-bottom:0;">
-                  <a href="javascript:ocmopts()" class="list-group-item active" style="background:#222;padding-top:2px;padding-bottom:2px"><img src="images/elipsis.png" style="width:32px"></a>
-               </div>
-            </div>
-            <!-- More Options Here -->
-            <div id="moremenu" style="display:none">
-               <div class="list-group" style="padding:0;margin-bottom:0;">
-                  <a href="javascript:logoutaccount()" class="list-group-item active lc-item" style="background: #444">
-                     <div class="center-block" style="max-width:120px"><span class="glyphicon glyphicon-lock" style="font-size:36px;vertical-align:middle"></span>&nbsp;&nbsp;&nbsp;Logout</div>
-                  </a>
-               </div>
-            </div>
-            <!-- end more options-->
-         </div>
-      </div>
-      <div id="bottommenu" class="navbar navbar-default navbar-fixed-bottom" style="display:none;min-height:0;">
-         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
-            <div class="btn-group btn-group-justified" >
-               <a href="home.html" class="btn btn-warning" style="margin-bottom:0;"><img src="images/ihanda.png" class="lc-icn"><br><small>iHanda</small></a>
-               <a href="itulong.html" class="btn btn-danger"style="margin-bottom:0;"><img src="images/itulong.png" class="lc-icn"><br><small>iTulong</small></a>
-               <a href="ibangon.html" class="btn btn-success"style="margin-bottom:0;"><img src="images/ibangon.png" class="lc-icn"><br><small>iBangon</small></a>
-            </div>
-         </div>
-      </div>
-      <div id="loadingtext" class="text-center center-block" style="max-width:640px;">
-         <h3><img id="imgloader" src="images/ajax-loader.gif" style="width:32px;opacity:0.5;vertical-align:middle;-webkit-border-radius:40px;border-radius: 40px;">&nbsp;<b>Loading...</b></h3>
-         <br>
-      </div>
-      <div class="container">
-         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
-            <!-- Offline Mode Alert - START -->
-            <div class="alert alert-info offlinemodeind" style="display:none">
-               <b>Offline Mode Activated</b><br>
-               <span class="pull-right" style="margin-left:10px;font-size:3em"><span class="glyphicon glyphicon-info-sign"></span></span>
-               <small>We saw that you are disconnected to the internet, so we made iLigtas App suitable for those who are offline</small>
-               <span class="clearfix"></span>
-            </div>
-            <!-- Offline Mode Alert - END -->
-            <!-- Insert Content Here - START -->
-            <!-- START Content Container -->
-            <div id="contentcontainer" style="display:none">
-               <div class="alert alert-success">
-                  <span class="pull-right" style="margin-left:10px;"><img src="images/ibangon.png" style="width:54px;vertical-align:middle"></span></span>
-                  <h2>iBangon</h2>
-                  <small>I Care. Improve disaster recovery and rescue operations management.</small>
-                  <span class="clearfix"></span>
-               </div>
-               <div class="panel panel-default onlyonline">
-                  <div class="panel-heading"><b>Map Overlay</b></div>
-                  <div class="panel-body">
-                     <div id="map-canvas" class="center-block" style="width:90%; height:400px;border: 2px solid #ccc"></div>
-                  </div>
-               </div>
-               <div class="onlyonline">
-                  <b>View Aid Assistance Distribution:</b><br>
-                  <select id="locchooser" onchange="loaddatatograph(this.value)" style="height:40px;width:100%">
-                     <option value="cancel">Select a Location</option>
-                  </select>
-				  <br><br>
-                  <div id="canvascont" class="panel panel-primary" style="display:none;">
-                     <div class="panel-heading"><b>Aid Assistance Distribution<span id="forloc"></span></b></div>
-                     <div class="panel-body">
-                        <canvas class="center-block" id="canvas" width="180" height="180"></canvas>
-                     </div>
-                     <div class="panel-footer">
-                        <div id="chartlegendcont">
-                        </div>
+   <head>
+      <title>Readysaster App</title>
+      <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" >
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+      <style>
+         body {
+         background:#ddd;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="navbar navbar-default">
+         <br>
+         <div class="center-block">
+            <div class="text-center">
+               <img src="images/banner-with-text.png" style="max-width:60%;margin-bottom:10px;">
+               <div class="list-group" style="padding:0;margin-bottom:0;">
+                  <a href="javascript:ocmopts()" class="list-group-item active" style="background:#222;padding-top:2px;padding-bottom:2px"><img src="images/elipsis.png" style="width:32px"></a>
+               </div>
+            </div>
+            <!-- More Options Here -->
+            <div id="moremenu" style="display:none">
+               <div class="list-group" style="padding:0;margin-bottom:0;">
+                  <a href="javascript:logoutaccount()" class="list-group-item active lc-item" style="background: #444">
+                     <div class="center-block" style="max-width:120px"><span class="glyphicon glyphicon-lock" style="font-size:36px;vertical-align:middle"></span>&nbsp;&nbsp;&nbsp;Logout</div>
+                  </a>
+               </div>
+            </div>
+            <!-- end more options-->
+         </div>
+      </div>
+      <div id="bottommenu" class="navbar navbar-default navbar-fixed-bottom" style="display:none;min-height:0;">
+         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
+            <div class="btn-group btn-group-justified" >
+               <a href="home.html" class="btn btn-warning" style="margin-bottom:0;"><img src="images/ihanda.png" class="lc-icn"><br><small>iHanda</small></a>
+               <a href="itulong.html" class="btn btn-danger"style="margin-bottom:0;"><img src="images/itulong.png" class="lc-icn"><br><small>iTulong</small></a>
+               <a href="ibangon.html" class="btn btn-success"style="margin-bottom:0;"><img src="images/ibangon.png" class="lc-icn"><br><small>iBangon</small></a>
+            </div>
+         </div>
+      </div>
+      <div id="loadingtext" class="text-center center-block" style="max-width:640px;">
+         <h3><img id="imgloader" src="images/ajax-loader.gif" style="width:32px;opacity:0.5;vertical-align:middle;-webkit-border-radius:40px;border-radius: 40px;">&nbsp;<b>Loading...</b></h3>
+         <br>
+      </div>
+      <div class="container">
+         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
+            <!-- Offline Mode Alert - START -->
+            <div class="alert alert-info offlinemodeind" style="display:none">
+               <b>Offline Mode Activated</b><br>
+               <span class="pull-right" style="margin-left:10px;font-size:3em"><span class="glyphicon glyphicon-info-sign"></span></span>
+               <small>We saw that you are disconnected to the internet, so we made iLigtas App suitable for those who are offline</small>
+               <span class="clearfix"></span>
+            </div>
+            <!-- Offline Mode Alert - END -->
+            <!-- Insert Content Here - START -->
+            <!-- START Content Container -->
+            <div id="contentcontainer" style="display:none">
+               <div class="alert alert-success">
+                  <span class="pull-right" style="margin-left:10px;"><img src="images/ibangon.png" style="width:54px;vertical-align:middle"></span></span>
+                  <h2>iBangon</h2>
+                  <small>I Care. Improve disaster recovery and rescue operations management.</small>
+                  <span class="clearfix"></span>
+               </div>
+               <div class="panel panel-default onlyonline">
+                  <div class="panel-heading"><b>Map Overlay</b></div>
+                  <div class="panel-body">
+                     <div id="map-canvas" class="center-block" style="width:90%; height:400px;border: 2px solid #ccc"></div>
+                  </div>
+               </div>
+               <div class="onlyonline">
+                  <b>View Aid Assistance Distribution:</b><br>
+                  <select id="locchooser" onchange="loaddatatograph(this.value)" style="height:40px;width:100%">
+                     <option value="cancel">Select a Location</option>
+                  </select>
+				  <br><br>
+                  <div id="canvascont" class="panel panel-primary" style="display:none;">
+                     <div class="panel-heading"><b>Aid Assistance Distribution<span id="forloc"></span></b></div>
+                     <div class="panel-body">
+                        <canvas class="center-block" id="canvas" width="180" height="180"></canvas>
+                     </div>
+                     <div class="panel-footer">
+                        <div id="chartlegendcont">
+                        </div>
 						<div id="tweetsharecont" style="display:none"></div>
 						<a href="javascript:tweetchartdata();" class="btn btn-info btn-block" style="text-decoration:none;margin-top:10px;">Tweet Chart Data</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- END Content Container -->
-            <!-- END Content Here -->
-            <div class="text-center"><br>iLigtas | READYSASTER 2014<br></div>
-            <!-- DO NOT REMOVE THIS - Used to Determine Online from Offline Mode-->
-            <div class="offlinemodeind text-center" style="display:none"><span class="label label-info">OFFLINE MODE ACTIVATED</span></div>
-         </div>
-         <div style="height:100px;"></div>
-      </div>
-      <!--- Error Modal Start -->
-      <div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-vertical-centered">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 id="popuptitle" class="modal-title"></h4>
-               </div>
-               <div class="modal-body">
-                  <p id="popuptext"></p>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--- Error Modal End -->
-      <script src="js/jquery-1.10.2.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="js/jquery.validate.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-      <script src="js/chart.min.js"></script>
-      <script>
-         function ocmopts()
-         {
-         //opens and closes the more options menu
-         $( "#moremenu" ).slideToggle("fast");
-         }
-         
-         var map;
-         function initialize() {
-          var mapOptions = {
-            zoom: 5,
-            center: new google.maps.LatLng(14.933553,120.20024)
-          };
-          map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-          
-          
-          
-          var ctaLayer = new google.maps.KmlLayer({
-            url: 'http://gcccs.org/iligtas/genkml.php?rev='+Math.floor(Math.random()*9999999)
-          });
-          ctaLayer.setMap(map);
-         
-         }	
-         function loaddatatograph(locationstring)
-         {
-         if (locationstring == "cancel")
-         {
-         $("#canvascont").slideUp("fast");
-         return;
-         }
-         $.getJSON("http://gcccs.org/iligtas/chartdata.php?callback=?",{loc: locationstring.toString()},function(data)
-         		{
-         		$("#forloc").html(":<h4>"+locationstring+"</h4>");
-         		$("#canvascont").slideDown("fast");
-         		$('html, body').animate({
-                scrollTop: $("#canvascont").offset().top
-         		}, "fast");
-         		var doughnutData = [
-         			{
-         				value: data.medicalcount,
-         				color:"#F7464A"
-         			},
-         			{
-         				value : data.foodcount,
-         				color : "#46BFBD"
-         			},
-         			{
-         				value : data.sheltercount,
-         				color : "#FDB45C"
-         			},
-         			{
-         				value : data.constructioncount,
-         				color : "#949FB1"
-         			},
-         			{
-         				value : data.rescuecount,
-         				color : "#4D5360"
-         			}
-         		];
-				$("#tweetsharecont").text('Aid Needed in: '+locationstring+' - MED: ' + data.medicalcount+ ' FOOD: ' + data.foodcount +  ' EVAC: ' + data.sheltercount + ' CONS: ' + data.constructioncount+ ' RESC: ' + data.rescuecount + ' #RescuePH #iLigtas #Readysaster');
-         		var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);
-         		$("#chartlegendcont").html('<img src="images/colormedical.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Medical: </b>'+data.medicalcount+
-         												'&nbsp;&nbsp;<img src="images/colorfood.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Food: </b>'+data.foodcount+
-         												'&nbsp;&nbsp;<img src="images/colorshelter.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Shelter: </b>'+data.sheltercount+
-         												'&nbsp;&nbsp;<img src="images/colorconstruction.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Construction: </b>'+data.constructioncount+
-         												'&nbsp;&nbsp;<img src="images/colorrescue.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Rescue: </b>'+data.rescuecount
-         												);
-         		});
-         		
-            }
-         function tweetchartdata()
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- END Content Container -->
+            <!-- END Content Here -->
+            <div class="text-center"><br>iLigtas | READYSASTER 2014<br></div>
+            <!-- DO NOT REMOVE THIS - Used to Determine Online from Offline Mode-->
+            <div class="offlinemodeind text-center" style="display:none"><span class="label label-info">OFFLINE MODE ACTIVATED</span></div>
+         </div>
+         <div style="height:100px;"></div>
+      </div>
+      <!--- Error Modal Start -->
+      <div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-vertical-centered">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 id="popuptitle" class="modal-title"></h4>
+               </div>
+               <div class="modal-body">
+                  <p id="popuptext"></p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--- Error Modal End -->
+      <script src="js/jquery-1.10.2.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+      <script src="js/chart.min.js"></script>
+      <script>
+         function ocmopts()
+         {
+         //opens and closes the more options menu
+         $( "#moremenu" ).slideToggle("fast");
+         }
+         
+         var map;
+         function initialize() {
+          var mapOptions = {
+            zoom: 5,
+            center: new google.maps.LatLng(14.933553,120.20024)
+          };
+          map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+          
+          
+          
+          var ctaLayer = new google.maps.KmlLayer({
+            url: 'http://gcccs.org/iligtas/genkml.php?rev='+Math.floor(Math.random()*9999999)
+          });
+          ctaLayer.setMap(map);
+         
+         }	
+         function loaddatatograph(locationstring)
+         {
+         if (locationstring == "cancel")
+         {
+         $("#canvascont").slideUp("fast");
+         return;
+         }
+         $.getJSON("http://gcccs.org/iligtas/chartdata.php?callback=?",{loc: locationstring.toString()},function(data)
+         		{
+         		$("#forloc").html(":<h4>"+locationstring+"</h4>");
+         		$("#canvascont").slideDown("fast");
+         		$('html, body').animate({
+                scrollTop: $("#canvascont").offset().top
+         		}, "fast");
+         		var doughnutData = [
+         			{
+         				value: data.medicalcount,
+         				color:"#F7464A"
+         			},
+         			{
+         				value : data.foodcount,
+         				color : "#46BFBD"
+         			},
+         			{
+         				value : data.sheltercount,
+         				color : "#FDB45C"
+         			},
+         			{
+         				value : data.constructioncount,
+         				color : "#949FB1"
+         			},
+         			{
+         				value : data.rescuecount,
+         				color : "#4D5360"
+         			}
+         		];
+				$("#tweetsharecont").text('Aid Needed in: '+locationstring+' - MED: ' + data.medicalcount+ ' FOOD: ' + data.foodcount +  ' EVAC: ' + data.sheltercount + ' CONS: ' + data.constructioncount+ ' RESC: ' + data.rescuecount + ' #RescuePH #iLigtas #Readysaster');
+         		var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);
+         		$("#chartlegendcont").html('<img src="images/colormedical.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Medical: </b>'+data.medicalcount+
+         												'&nbsp;&nbsp;<img src="images/colorfood.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Food: </b>'+data.foodcount+
+         												'&nbsp;&nbsp;<img src="images/colorshelter.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Shelter: </b>'+data.sheltercount+
+         												'&nbsp;&nbsp;<img src="images/colorconstruction.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Construction: </b>'+data.constructioncount+
+         												'&nbsp;&nbsp;<img src="images/colorrescue.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Rescue: </b>'+data.rescuecount
+         												);
+         		});
+         		
+            }
+         function tweetchartdata()
 		 {
 		 window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent($("#tweetsharecont").text()),"_blank")
 		 }
-         $(function()
-         {
-         initialize();
-         $( "#loadingtext" ).delay(500).slideUp("fast"); //hides Loading Text below Header
-         $( "#bottommenu" ).slideDown("slow"); // Bottom Navbar Animation
-         $( "#contentcontainer" ).slideDown("fast"); // Content Animation
-         $.getJSON("http://gcccs.org/iligtas/getlocations.php?callback=?",function(data)
-         		{
-         		$.each(data, function(key, value) {
-         		$("#locchooser").append('<option value="'+value['location']+'">'+value['location']+'</option>');
-         		});
-         		});
-      </script>
-   </body>
+         $(function()
+         {
+         initialize();
+         $( "#loadingtext" ).delay(500).slideUp("fast"); //hides Loading Text below Header
+         $( "#bottommenu" ).slideDown("slow"); // Bottom Navbar Animation
+         $( "#contentcontainer" ).slideDown("fast"); // Content Animation
+         $.getJSON("http://gcccs.org/iligtas/getlocations.php?callback=?",function(data)
+         		{
+         		$.each(data, function(key, value) {
+         		$("#locchooser").append('<option value="'+value['location']+'">'+value['location']+'</option>');
+         		});
+         		});
+}
+      </script>
+   </body>
 </html>
