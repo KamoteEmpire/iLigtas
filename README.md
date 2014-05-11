@@ -15,14 +15,16 @@ iLigtas is a flexible lowtech and hitech, easy to use, cross-platform mobile app
             
     * has an OFFLINE mode where users can send sms for geotagging in case of the inavailability of Network Data Services
     * SMS can easily be sent by texting "NOW iligtas <keyword>" and send to 6800
-                > keywords
+                
+
+     * * > keywords
     
      * * MED  for medical
      * * RESC for rescue 
      * * FOOD for food and water
-                    * EVAC for evacuation
-                    * CONS for construction or infrastructure
-                > ex. NOW ILIGTAS FOOD send to 6800 will report a need for food and water
+     * * EVAC for evacuation
+     * * CONS for construction or infrastructure
+     * * > ex. NOW ILIGTAS FOOD send to 6800 will report a need for food and water
                 
 
   * iBangon - creates and lets users view a neat easy to understand infographics to better analyze the collated crowd source data then shares them to LGU's and NGO's to help those in need
