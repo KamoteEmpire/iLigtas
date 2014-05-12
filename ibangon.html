@@ -61,7 +61,7 @@
                <div class="alert alert-success">
                   <span class="pull-right" style="margin-left:10px;"><img src="images/ibangon.png" style="width:54px;vertical-align:middle"></span></span>
                   <h2>iBangon</h2>
-                  <small>I Care. Improve disaster recovery and rescue operations management.</small>
+                  <small>I Share. Improve disaster recovery and rescue operations management.</small>
                   <span class="clearfix"></span>
                </div>
                <div class="panel panel-default onlyonline">
@@ -177,8 +177,11 @@
          				color : "#4D5360"
          			}
          		];
+         		
 				$("#tweetsharecont").text('Aid Needed in: '+locationstring+' - MED: ' + data.medicalcount+ ' FOOD: ' + data.foodcount +  ' EVAC: ' + data.sheltercount + ' CONS: ' + data.constructioncount+ ' RESC: ' + data.rescuecount + ' #RescuePH #iLigtas #Readysaster');
-         		var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);
+				$('#canvas').replaceWith('<canvas id="canvas" class="center-block" width="180" height="180"></canvas>');
+				var ctx = document.getElementById("canvas").getContext("2d");
+				var myDoughnut = new Chart(ctx).Doughnut(doughnutData);
          		$("#chartlegendcont").html('<img src="images/colormedical.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Medical: </b>'+data.medicalcount+
          												'&nbsp;&nbsp;<img src="images/colorfood.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Food: </b>'+data.foodcount+
          												'&nbsp;&nbsp;<img src="images/colorshelter.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Shelter: </b>'+data.sheltercount+
@@ -204,7 +207,6 @@
          		$("#locchooser").append('<option value="'+value['location']+'">'+value['location']+'</option>');
          		});
          		});
-         $("#canvas").prop({ width: 180, height: 180 });
          });
       </script>
    </body>
