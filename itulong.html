@@ -18,6 +18,7 @@
             <div class="text-center">
                <img src="images/banner-with-text.png" style="max-width:60%;margin-bottom:10px;">
                <div class="list-group" style="padding:0;margin-bottom:0;">
+				  <!-- function ocmopts() opens the more options tab below the header -->
                   <a href="javascript:ocmopts()" class="list-group-item active" style="background:#222;padding-top:2px;padding-bottom:2px"><img src="images/elipsis.png" style="width:32px"></a>
                </div>
             </div>
@@ -166,115 +167,9 @@
       <script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script type="text/javascript" src="js/jquery.validate.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	  <script type="text/javascript" src="js/gmap3.min.js"></script>
       <script>
-         var geocoder;
-         var x=document.getElementById("demo");
-         function getLocation(){
-         	geocoder = new google.maps.Geocoder();
-         	
-         	$("#username").val(globalusername);
-         	
-         	//code for date and time
-         	var now     = new Date(); 
-         	var year    = now.getFullYear();
-         	var month   = now.getMonth()+1; 
-         	var day     = now.getDate();
-         	var hour    = now.getHours();
-         	var minute  = now.getMinutes();
-         	var second  = now.getSeconds(); 
-         	if(month.toString().length == 1) {
-         		var month = '0'+month;
-         	}
-         	if(day.toString().length == 1) {
-                var day = '0'+day;
-         	}   
-         	if(hour.toString().length == 1) {
-         		var hour = '0'+hour;
-         	}
-         	if(minute.toString().length == 1) {
-         		var minute = '0'+minute;
-         	}
-         	if(second.toString().length == 1) {
-         		var second = '0'+second;
-         	}   
-         	var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;
-         	document.getElementById('datetime').value = dateTime;
-         
-         //end code date and time
-         if (navigator.geolocation)
-            {
-            navigator.geolocation.getCurrentPosition(showPosition,showError);
-         
-            }
-          else{x.innerHTML="Geolocation is not supported by this browser.";}
-          }
-         
-         function showPosition(position)
-          {
-          lat=position.coords.latitude;
-          lon=position.coords.longitude;
-          latlon=new google.maps.LatLng(lat, lon);
-          mapholder=document.getElementById('mapholder');
-          
-          
-          document.getElementById("latitude").value = position.coords.latitude;
-          document.getElementById("longitude").value = position.coords.longitude;
-          
-          document.getElementById('latlong').value = position.coords.latitude+","+position.coords.longitude;
-         
-          var myOptions={
-          center:latlon,zoom:15,
-          mapTypeId:google.maps.MapTypeId.ROADMAP,
-          mapTypeControl:false,
-          navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-          };
-          var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
-          var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
-          
-          //start codelatlang
-          var input = document.getElementById('latlong').value;
-          var latlngStr = input.split(',', 2);
-          var lat = parseFloat(latlngStr[0]);
-          var lng = parseFloat(latlngStr[1]);
-          var latlng = new google.maps.LatLng(lat, lng);
-          geocoder.geocode({'latLng': latlng}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-              if (results[1]) {
-                
-                document.getElementById('currentaddress').value = results[1].formatted_address;
-         	document.getElementById('currentaddressheader').innerHTML = results[1].formatted_address;
-                //infowindow.open(map, marker);
-              } else {
-                alert('No results found');
-              }
-            } else {
-              alert('Geocoder failed due to: ' + status);
-            }
-          });
-          
-          //end code latlang
-          }
-         
-         function showError(error)
-          {
-          switch(error.code) 
-            {
-            case error.PERMISSION_DENIED:
-              x.innerHTML="User denied the request for Geolocation."
-              break;
-            case error.POSITION_UNAVAILABLE:
-              x.innerHTML="Location information is unavailable."
-              break;
-            case error.TIMEOUT:
-              x.innerHTML="The request to get user location timed out."
-              break;
-            case error.UNKNOWN_ERROR:
-              x.innerHTML="An unknown error occurred."
-              break;
-            }
-          }
-		  
 		  function openterms()
 		  {
 		  //Opens the Terms Modal
@@ -288,6 +183,7 @@
           $.getJSON("http://gcccs.org/iligtas/requestaid.php?callback=?", form.serialize(),function(data)
          		{
          		alert("Your SOS is successfully saved and marked.");
+         		location.reload();
          		$('#loadingmodal').modal("hide");
          		}).fail(function(data){
          		alert("Failed to ask Aid.");
@@ -301,7 +197,46 @@
          //opens and closes the more options menu
          $( "#moremenu" ).slideToggle("fast");
          }
-         $(function(){getLocation();
+		 
+		 var lat;
+		 var lon;
+		 var latlng;
+		 var geocoder;
+		 function showMap(position)
+		 {
+		 lat = position.coords.latitude;
+		 lon = position.coords.longitude;
+		 latlng = new google.maps.LatLng(lat, lon);
+		 geocoder = new google.maps.Geocoder();
+         geocoder.geocode({'latLng': latlng}, function(results, status) {
+			 $('#currentaddress').val(results[1].formatted_address);
+			 $('#currentaddressheader').html(results[1].formatted_address);
+		 });
+		 $("#mapholder").gmap3({
+			  marker:{
+				latLng: [lat, lon], 
+				title: "You are Here!"
+			  },
+			  map:{
+				options:{
+				  zoom: 15, mapTypeId: google.maps.MapTypeId.ROADMAP,mapTypeControl: false,center:[lat, lon]
+				}
+			  }
+			});
+		
+		 //setting up all other element values
+		 $("#username").val(globalusername);
+		 $("#latitude").val(lat);
+		 $("#longitude").val(lon);
+		 $("#latlong").val(lat+","+lon);
+		 //code for date and time
+         	var now     = new Date();
+         	var dateTime = now.getFullYear()+'/'+(now.getMonth()+1<10 ? '0' : '')+(now.getMonth()+1).toString()+'/'+(now.getDate()<10 ? '0' : '')+(now.getDate()).toString()+' '+(now.getHours()<10 ? '0' : '')+(now.getHours()).toString()+':'+(now.getMinutes()<10 ? '0' : '')+(now.getMinutes()).toString()+':'+(now.getSeconds()<10 ? '0' : '')+(now.getSeconds()).toString();
+         	$('#datetime').val(dateTime.toString());
+		 }
+		 
+         $(function(){
+		 navigator.geolocation.getCurrentPosition(showMap);
          $( "#loadingtext" ).delay(500).slideUp("fast"); //hides Loading Text below Header
          $( "#bottommenu" ).slideDown("slow"); // Bottom Navbar Animation
          $( "#contentcontainer" ).slideDown("fast"); // Content Animation
