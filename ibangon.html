@@ -73,7 +73,7 @@
                <div class="onlyonline">
                   <b>View Aid Assistance Distribution:</b><br>
                   <select id="locchooser" onchange="loaddatatograph(this.value)" style="height:40px;width:100%">
-                     <option value="cancel">Select a Location</option>
+                     <option value="cancel">Locations are not loaded yet.</option>
                   </select>
 				  <br><br>
                   <div id="canvascont" class="panel panel-primary" style="display:none;">
@@ -116,7 +116,8 @@
       <script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script type="text/javascript" src="js/jquery.validate.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	  <script type="text/javascript" src="js/gmap3.min.js"></script>
       <script src="js/chart.min.js"></script>
       <script>
          function ocmopts()
@@ -125,21 +126,16 @@
          $( "#moremenu" ).slideToggle("fast");
          }
          
-         var map;
-         function initialize() {
-          var mapOptions = {
-            zoom: 5,
-            center: new google.maps.LatLng(14.933553,120.20024)
-          };
-          map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-          
-          
-          
-          var ctaLayer = new google.maps.KmlLayer({
-            url: 'http://gcccs.org/iligtas/genkml.php?rev='+Math.floor(Math.random()*9999999)
-          });
-          ctaLayer.setMap(map);
          
+         function initialize() {
+         $("#map-canvas").gmap3({ 
+			  map:{options:{zoom: 15}},
+			  kmllayer:{
+				options:{
+				  url: 'http://gcccs.org/iligtas/genkml.php?rev='+Math.floor(Math.random()*9999999)
+				},
+			  }
+			});
          }	
          function loaddatatograph(locationstring)
          {
@@ -177,9 +173,9 @@
          				color : "#4D5360"
          			}
          		];
-         		
 				$("#tweetsharecont").text('Aid Needed in: '+locationstring+' - MED: ' + data.medicalcount+ ' FOOD: ' + data.foodcount +  ' EVAC: ' + data.sheltercount + ' CONS: ' + data.constructioncount+ ' RESC: ' + data.rescuecount + ' #RescuePH #iLigtas #Readysaster');
-				$('#canvas').replaceWith('<canvas id="canvas" class="center-block" width="180" height="180"></canvas>');
+         		$('#canvas').replaceWith('<canvas id="canvas" class="center-block" width="180" height="180"></canvas>');
+				$("#canvas").prop({ width: $("#canvascont").width()-30, height: $("#canvascont").width()-30 });
 				var ctx = document.getElementById("canvas").getContext("2d");
 				var myDoughnut = new Chart(ctx).Doughnut(doughnutData);
          		$("#chartlegendcont").html('<img src="images/colormedical.png" style="padding:2px 2px 2px 2px;width:24px;height:24px;">&nbsp;<b>Medical: </b>'+data.medicalcount+
@@ -203,7 +199,9 @@
          $( "#contentcontainer" ).slideDown("fast"); // Content Animation
          $.getJSON("http://gcccs.org/iligtas/getlocations.php?callback=?",function(data)
          		{
+				$("#locchooser").html('<option value="cancel">Select a Location</option>');
          		$.each(data, function(key, value) {
+				
          		$("#locchooser").append('<option value="'+value['location']+'">'+value['location']+'</option>');
          		});
          		});
