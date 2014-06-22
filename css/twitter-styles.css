@@ -8,12 +8,12 @@
 }
   
 #twitter-feed {
-    width:93%;
+    width:100%;
     margin:auto;
     padding:8px 10px 5px 10px;
     border-radius:12px;
-    background-color:#FFF;
-    color:#333;
+    background-color:#fff;
+    color:#000;
     overflow:auto;
 }
   
@@ -27,20 +27,26 @@
   
 .twitter-article, #loading-container {
     width:100%;
-    border-top:1px dotted #CCC;
     float:left; 
     padding:8px 0px 8px 0px;
     position:relative;
 } 
+.twitter-article
+{
+ border-bottom:1px solid #CCC;
+ }
+ .twitter-article:last-child
+ {
+ border-bottom: none;
+ }
 .twitter-pic {
     position:absolute;
 }
-  
 .twitter-pic img {
     float:left;
     border-radius:7px;  
     border:none;
-      
+    margin-bottom:1px
 }
   
 /* -------- TEXT STYLING ------*/
@@ -99,7 +105,7 @@
     width:25px;
     height:16px;
     display:block;
-    background-image:url(../images/tweet-actions.png);
+    background-image:url(tweet-actions.png);
     float:left; 
 } 
 .intent a:hover{
@@ -123,7 +129,7 @@
 #retweet-indicator {
     width:14px;
     height:10px;
-    background-image:url(images/tweet-actions.png);
+    background-image:url(tweet-actions.png);
     background-position:-5px -54px;
     margin-top:3px;
     float:left;

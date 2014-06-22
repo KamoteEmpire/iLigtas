@@ -15,9 +15,8 @@
 		
 		var headerHTML = '';
 		var loadingHTML = '';
-		headerHTML += '<img src="images/icon_48.png" width="34" style="float:left;padding:3px 12px 0px 6px" alt="twitter bird" />';
-		headerHTML += '<h1>'+twittersearchtitle+'</h1>';
-		loadingHTML += '<div id="loading-container"><img id="imgloader" src="images/ajax-loader.gif" style="width:32px;opacity:0.5;vertical-align:middle;-webkit-border-radius:40px;border-radius: 40px;"></div>';
+		headerHTML += '';
+		loadingHTML += '<div id="loading-container"><img id="imgloader" src="images/ajax-loader.gif" style="width:32px;opacity:0.5;vertical-align:middle;-webkit-border-radius:40px;border-radius: 40px;">&nbsp;Loading...</div>';
 		
 		$('#twitter-feed').html(headerHTML + loadingHTML);
 		 
@@ -64,13 +63,13 @@
 								}
 											 
 								feedHTML += '<div class="twitter-article" id="tw'+displayCounter+'">';                  
-								feedHTML += '<div class="twitter-pic"><a href="https://twitter.com/'+tweetusername+'" ><img src="'+profileimage+'"images/twitter-feed-icon.png" width="42" height="42" alt="twitter icon" /></a></div>';
-								feedHTML += '<div class="twitter-text"><p><span class="tweetprofilelink"><strong><a href="https://twitter.com/'+tweetusername+'" >'+tweetscreenname+'</a></strong> <a href="https://twitter.com/'+tweetusername+'" >@'+tweetusername+'</a></span><span class="tweet-time"><a href="https://twitter.com/'+tweetusername+'/status/'+tweetid+'">'+relative_time(feeds[i].created_at)+'</a></span><br/>'+status+'</p></div>';
+								feedHTML += '<div class="twitter-pic"><img src="'+profileimage+'"images/twitter-feed-icon.png" width="42" height="42" alt="twitter icon" /></div>';
+								feedHTML += '<div class="twitter-text" style="min-height:43px"><p><span class="tweetprofilelink"><strong>'+tweetscreenname+'</strong>@'+tweetusername+'</span><span class="tweet-time">'+relative_time(feeds[i].created_at)+'</span><br/>'+status+'</p><div class="clearfix"></div></div>';
 								if ((isaretweet == true) && (showretweetindicator == true)) {
 									feedHTML += '<div id="retweet-indicator"></div>';
 								}						
 								if (showtweetactions == true) {
-									feedHTML += '<div id="twitter-actions"><div class="intent" id="intent-reply"><a href="https://twitter.com/intent/tweet?in_reply_to='+tweetid+'" title="Reply"></a></div><div class="intent" id="intent-retweet"><a href="https://twitter.com/intent/retweet?tweet_id='+tweetid+'" title="Retweet"></a></div><div class="intent" id="intent-fave"><a href="https://twitter.com/intent/favorite?tweet_id='+tweetid+'" title="Favourite"></a></div></div>';
+									//feedHTML += '<div id="twitter-actions"><div class="intent" id="intent-reply"><a href="https://twitter.com/intent/tweet?in_reply_to='+tweetid+'" title="Reply"></a></div><div class="intent" id="intent-retweet"><a href="https://twitter.com/intent/retweet?tweet_id='+tweetid+'" title="Retweet"></a></div><div class="intent" id="intent-fave"><a href="https://twitter.com/intent/favorite?tweet_id='+tweetid+'" title="Favourite"></a></div></div>';
 								}
 								feedHTML += '</div>';
 								displayCounter++;
