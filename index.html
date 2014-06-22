@@ -52,6 +52,7 @@
                   </div>
                </div>
                <a href = "javascript:opencloseregistration();" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Register for iLigtas Account</a>
+			   <a href="emergencymode.html" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;Emergency Mode</a>
             </div>
             <!--login container end-->
             <!--registration container start-->
@@ -241,11 +242,12 @@
          <div class="modal-dialog modal-vertical-centered">
             <div class="modal-content">
                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   <h4 id="popuptitle" class="modal-title"></h4>
                </div>
                <div class="modal-body">
                   <p id="popuptext"></p>
+				  <div id="footercontent"></div>
+				  <div class="clearfix"></div>
                </div>
             </div>
          </div>
@@ -375,12 +377,14 @@
          				$('#loadingmodal').modal("hide");
          				$("#popuptitle").html("Unable to Login");
          				$("#popuptext").html("<b>The account you've entered is not associated with iLigtas. Please check your username or password.</b>");
+						$("#footercontent").html('<button data-dismiss="modal" class="btn btn-info pull-right">OK</button>');
          				$('#errormodal').modal('show');
          				}
          			}).fail(function(data){
          				$('#loadingmodal').modal("hide");
          				$("#popuptitle").html("Unable to Login");
-         				$("#popuptext").html("<b>There is a problem with your login, please try again later.</b>");
+         				$("#popuptext").html("<b>There is a problem with your login, please try again later.</b>");						
+						$("#footercontent").html('<button data-dismiss="modal" class="btn btn-info pull-right">OK</button>');
          				$('#errormodal').modal('show');
          				
          			});
@@ -414,14 +418,17 @@
          				$('#loadingmodal').modal({backdrop: "static",keyboard: false},'show');
          				$.getJSON("http://gcccs.org/iligtas/uregister.php?callback=?", form.serialize(),function(data)
          				{
-         					alert("Registration Complete!");
-         					location.reload();
-         					$('#loadingmodal').modal("hide");
+							$('#loadingmodal').modal('hide');
+							$("#popuptitle").html("Success!");
+							$("#popuptext").html("<b>Registration Complete!</b>");
+							$("#footercontent").html('<a href="javascript:reloadwhenclosed()" class="btn btn-info pull-right">OK</a>');
+							$('#errormodal').modal('show');
          				}).fail(function(data){
-         					alert("Registration Failed!");
-         					location.reload();
-         					$('#loadingmodal').modal("hide");
-         					
+							$('#loadingmodal').modal('hide');
+         					("#popuptitle").html("Oh No!");
+							$("#popuptext").html("<b>Registration Failed!</b>");
+							$("#footercontent").html('<a href="javascript:reloadwhenclosed()" class="btn btn-info pull-right">OK</a>');
+							$('#errormodal').modal('show');
          				});
          				}
          				$('#loadingmodal').modal("hide");
@@ -429,6 +436,7 @@
          				$('#loadingmodal').modal("hide");
          				$("#popuptitle").html("Unable to Register Account");
          				$("#popuptext").html("There is a problem with your E-mail Address or Username, please try again later.");
+						$("#footercontent").html('<button data-dismiss="modal" class="btn btn-info pull-right">OK</button>');
          				$('#errormodal').modal('show');
          		});
          			}

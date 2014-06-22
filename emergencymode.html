@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Readysaster App</title>
+      <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" >
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+      <link href="css/twitter-styles.css" rel="stylesheet" type="text/css" />
+      <style>
+         body {
+         background:#ddd;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="navbar navbar-default" style="min-height:0;">
+         <br>
+		 <span class="pull-left" style="margin-left:10px"><a href="index.html" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;BACK</a></span>
+         <div class="text-center" style="vertical-align:middle">
+		 <img src="images/banner.png" style="max-width:60%;">
+         </div>
+		 <br>
+      </div>
+      <div class="container">
+         <div style="max-width:640px;margin-left:auto;margin-right:auto;">
+			<!-- Emergency Mode Alert - START -->
+            <div class="alert alert-danger">
+               <span class="pull-right" style="margin-left:10px;font-size:3em"><span class="glyphicon glyphicon-time"></span></span>
+               <h2>Emergency Mode</h2>
+			   <small>If it's too late to go online or you didn't have an internet connection, all offline instructions and information in iLigtas can be found in this mode.</small>
+               <span class="clearfix"></span>
+            </div>
+            <!-- Emergency Mode Alert - END -->
+			<div id="contentcontainer">
+			   <div class="panel panel-warning" style="margin-bottom:5px">
+					<div class="panel-heading" style="padding:1px 1px 1px 1px;">
+						<a class="btn btn-warning btn-block" data-toggle="collapse" href="#caskaidsms">
+						<span class="glyphicon glyphicon-phone"></span>&nbsp;<b>Ask Aid via SMS</b>
+						</a>
+					</div>
+					<div id="caskaidsms" class="panel-collapse collapse">
+					  <div class="panel-body">
+						Ask for help even OFFLINE, simply by texting "<b>NOW ILIGTAS &lt;keyword&gt;</b>" and send to <b>6800</b> <br> keywords: <a class="btn btn-primary btn-sm" style="margin-top:2px">FOOD</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">MED</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">RESC</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">EVAC</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">CONS</a>
+					  </div>
+				   </div>
+			   </div>
+			 </div>
+		 </div>
+		 <div class="text-center"><br>iLigtas | READYSASTER 2014<br></div>
+         <div style="height:100px;"></div>
+      </div>
+      <script src="js/jquery-1.10.2.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script>
+	  $.get( "inserts/hotlinesinfographics.html", function( data ) {
+		 $( "#contentcontainer" ).prepend( data );
+		 });
+      </script>
+   </body>
+</html>

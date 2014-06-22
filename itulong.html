@@ -25,8 +25,11 @@
             <!-- More Options Here -->
             <div id="moremenu" style="display:none">
                <div class="list-group" style="padding:0;margin-bottom:0;">
+				  <a href="about.html" class="list-group-item active lc-item" style="background: #666">
+                     <div class="text-center"><span class="glyphicon glyphicon-info-sign" style="font-size:36px;vertical-align:middle"></span>&nbsp;&nbsp;&nbsp;About iLigtas</div>
+                  </a>
                   <a href="javascript:logoutaccount()" class="list-group-item active lc-item" style="background: #444">
-                     <div class="center-block" style="max-width:120px"><span class="glyphicon glyphicon-lock" style="font-size:36px;vertical-align:middle"></span>&nbsp;&nbsp;&nbsp;Logout</div>
+                     <div class="text-center"><span class="glyphicon glyphicon-lock" style="font-size:36px;vertical-align:middle"></span>&nbsp;&nbsp;&nbsp;Logout</div>
                   </a>
                </div>
             </div>
@@ -35,10 +38,10 @@
       </div>
       <div id="bottommenu" class="navbar navbar-default navbar-fixed-bottom" style="display:none;min-height:0;">
          <div style="max-width:640px;margin-left:auto;margin-right:auto;">
-            <div class="btn-group btn-group-justified" >
-               <a href="home.html" class="btn btn-warning" style="margin-bottom:0;"><img src="images/ihanda.png" class="lc-icn"><br><small>iHanda</small></a>
-               <a href="itulong.html" class="btn btn-danger"style="margin-bottom:0;"><img src="images/itulong.png" class="lc-icn"><br><small>iTulong</small></a>
-               <a href="ibangon.html" class="btn btn-success"style="margin-bottom:0;"><img src="images/ibangon.png" class="lc-icn"><br><small>iBangon</small></a>
+            <div class="btn-group btn-group-justified">
+               <a href="home.html" class="btn btn-warning nav-btn"><img src="images/ihanda.png" class="lc-icn"><br><small>iHanda</small></a>
+               <a href="itulong.html" class="btn btn-danger nav-btn"><img src="images/itulong.png" class="lc-icn"><br><small>iTulong</small></a>
+               <a href="ibangon.html" class="btn btn-success nav-btn"><img src="images/ibangon.png" class="lc-icn"><br><small>iBangon</small></a>
             </div>
          </div>
       </div>
@@ -107,7 +110,7 @@
                <div class="panel panel-primary">
                   <div class="panel-heading"><b>Ask Aid via SMS</b></div>
                   <div class="panel-body">
-				  Ask for help even OFFLINE, simply by texting "<b>NOW ILIGTAS &lt;keyword&gt;</b>" and send to <b>6800</b> <br> keywords: <a class="btn btn-primary btn-sm">FOOD</a>  <a class="btn btn-primary btn-sm">MED</a>  <a class="btn btn-primary btn-sm">RESC</a>  <a class="btn btn-primary btn-sm">EVAC</a>  <a class="btn btn-primary btn-sm">CONS</a>
+				  Ask for help even OFFLINE, simply by texting "<b>NOW ILIGTAS &lt;keyword&gt;</b>" and send to <b>6800</b> <br> keywords: <a class="btn btn-primary btn-sm" style="margin-top:2px">FOOD</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">MED</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">RESC</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">EVAC</a>  <a class="btn btn-primary btn-sm" style="margin-top:2px">CONS</a>
                   </div>
                </div>
             </div>
@@ -124,11 +127,12 @@
          <div class="modal-dialog modal-vertical-centered">
             <div class="modal-content">
                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   <h4 id="popuptitle" class="modal-title"></h4>
                </div>
                <div class="modal-body">
                   <p id="popuptext"></p>
+				  <div id="footercontent"></div>
+				  <div class="clearfix"></div>
                </div>
             </div>
          </div>
@@ -158,6 +162,8 @@
 						You have an <b>AFFIRMATIVE OBLIGATION</b> to provide the application with correct information. You agree to provide true, accurate, current and complete information and to maintain and promptly update your information as necessary. You agree not to impersonate any other person you are not authorized to use.
 						<br><br>
 						<p class="text-center">&copy; iLigtas May 2014. All Rights Reserved</p>
+						<button data-dismiss="modal" class="btn btn-info pull-right">OK</button>
+						<div class="clearfix"></div>
 					</p>
                </div>
             </div>
@@ -182,13 +188,17 @@
           $('#loadingmodal').modal({backdrop: "static",keyboard: false},'show');
           $.getJSON("http://gcccs.org/iligtas/requestaid.php?callback=?", form.serialize(),function(data)
          		{
-         		alert("Your SOS is successfully saved and marked.");
-         		location.reload();
-         		$('#loadingmodal').modal("hide");
+				$('#loadingmodal').modal('hide');
+         		$("#popuptitle").html("Success!");
+				$("#popuptext").html("<b>Your SOS is successfully saved and marked.</b>");
+				$("#footercontent").html('<a href="javascript:reloadwhenclosed()" class="btn btn-info pull-right">OK</a>');
+				$('#errormodal').modal('show');
          		}).fail(function(data){
-         		alert("Failed to ask Aid.");
-         		location.reload();
-         		$('#loadingmodal').modal("hide");
+				$('#loadingmodal').modal('hide');
+         		$("#popuptitle").html("Oh No!");
+				$("#popuptext").html("<b>Failed to ask Aid. Try again later.</b>");
+				$("#footercontent").html('<a href="javascript:reloadwhenclosed()" class="btn btn-info pull-right">OK</a>');
+				$('#errormodal').modal('show');
          		});
           }
           
