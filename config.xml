@@ -13,7 +13,7 @@
 	<icon src="images/icon_72.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="images/icon_96.png" gap:platform="android" gap:density="xhdpi" />
 	<icon src="images/icon_86.png" width="86" height="86" gap:role="default" />
-	<preference name="phonegap-version" value="3.3.0" />
+	<preference name="phonegap-version" value="3.4.0" />
 	
 	<access origin="*" subdomains="true" />
 	<access uri="*" subdomains="true" />
@@ -26,6 +26,7 @@
 	<gap:plugin name="org.apache.cordova.camera" />
 	<gap:plugin name="org.apache.cordova.media" />
 	<gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.geolocation" />
 	
 	<preference name="orientation" value="portrait" />
 	<preference name="fullscreen" value="true" />
